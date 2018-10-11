@@ -1,0 +1,92 @@
+#include<iostream>
+using namespace std;
+
+struct node{
+    int data;
+    node*left;
+    node*right;
+};
+
+
+  void inorder(node *root)
+  {
+      if(root!=NULL)
+      {
+          inorder(root->left);
+          cout<<root->data<<" ";
+          inorder(root->right);
+
+     }
+  }
+
+
+ void preorder(node *root)
+  {
+      if(root!=NULL)
+      {
+          cout<<root->data<<" ";
+          preorder(root->left);
+          preorder(root->right);
+    }
+  }
+
+
+
+  void postorder(node *root)
+  {
+      if(root!=NULL)
+      {
+  postorder(root->left);
+  postorder(root->right);
+  cout<<root->data <<" ";
+    }
+  }
+
+
+node *create_node(int value)
+{
+
+    node *newnode=new node();
+    newnode->data=value;
+    newnode->left=NULL;
+    newnode->right=NULL;
+    return newnode;
+
+}
+
+node*  ins(node *root,int value)
+ {
+
+     if(root==NULL)
+     {
+        return create_node(value);
+
+     }
+    if(root->data<value)
+    {
+       root->right = ins(root->right,value);
+    }
+    else{
+       root->left = ins(root->left,value);
+    }
+    return root;
+ }
+
+
+
+
+ int main()
+ {
+     node *root=NULL;
+     root=ins(root,12);
+     ins(root,10);
+     ins(root,15);
+     ins(root,14);
+     ins(root,19);
+     inorder(root);
+     cout<<endl;
+     preorder(root);
+     cout<<endl;
+     postorder(root);
+     return 0;
+ }
